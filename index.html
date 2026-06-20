@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A frosted, scroll-driven WebGL experience inspired by igloo.inc — built with Three.js, GSAP and Lenis." />
+    <title>FROST — WebGL Experience</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body>
+    <!-- Loading overlay -->
+    <div class="loader" id="loader">
+      <div class="loader__inner">
+        <span class="loader__count" id="loaderCount">0</span>
+        <span class="loader__label">loading experience</span>
+      </div>
+    </div>
+
+    <!-- WebGL canvas lives here -->
+    <canvas class="webgl" id="webgl"></canvas>
+
+    <!-- Fixed UI chrome -->
+    <header class="nav">
+      <a class="nav__brand" href="#">FROST°</a>
+      <nav class="nav__links">
+        <a href="#about">Index</a>
+        <a href="#tech">Process</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <button class="nav__cta">Enter</button>
+    </header>
+
+    <!-- Scrollable narrative content -->
+    <main class="content" id="content">
+      <section class="section section--hero" data-section="0">
+        <h1 class="hero__title">
+          <span class="line">FROST</span>
+          <span class="line line--thin">a study in ice &amp; light</span>
+        </h1>
+        <p class="hero__scroll">scroll to explore</p>
+      </section>
+
+      <section class="section section--right" data-section="1" id="about">
+        <div class="panel">
+          <span class="panel__index">01 — Index</span>
+          <h2 class="panel__title">Built entirely<br />inside the browser.</h2>
+          <p class="panel__body">
+            Every shard, every refraction and every particle is rendered in real
+            time with WebGL. No video, no pre-baked frames — just geometry,
+            shaders and light reacting to your scroll.
+          </p>
+        </div>
+      </section>
+
+      <section class="section section--left" data-section="2" id="tech">
+        <div class="panel">
+          <span class="panel__index">02 — Process</span>
+          <h2 class="panel__title">Three.js · GSAP<br />· custom GLSL.</h2>
+          <p class="panel__body">
+            A fresnel ice shader drives the crystal's glow, a thousand drifting
+            points form the snowfield, and GSAP timelines choreograph the camera
+            as you move down the page.
+          </p>
+        </div>
+      </section>
+
+      <section class="section section--center" data-section="3" id="contact">
+        <div class="panel panel--center">
+          <span class="panel__index">03 — Contact</span>
+          <h2 class="panel__title">Make something<br />that melts minds.</h2>
+          <a class="panel__cta" href="mailto:hello@example.com">hello@example.com</a>
+        </div>
+      </section>
+    </main>
+
+    <!-- Scroll progress indicator -->
+    <div class="progress">
+      <div class="progress__bar" id="progressBar"></div>
+    </div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

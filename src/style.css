@@ -1,0 +1,258 @@
+:root {
+  --bg: #05070d;
+  --ink: #eaf2ff;
+  --ink-dim: rgba(234, 242, 255, 0.55);
+  --accent: #7fd4ff;
+  --font: 'Space Grotesk', system-ui, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Lenis smooth-scroll requirements */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ---------- WebGL canvas ---------- */
+.webgl {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  z-index: 1;
+  outline: none;
+}
+
+/* ---------- Loader ---------- */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg);
+  display: grid;
+  place-items: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.loader.is-done {
+  opacity: 0;
+  visibility: hidden;
+}
+.loader__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+.loader__count {
+  font-size: clamp(3rem, 12vw, 8rem);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+}
+.loader__label {
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 0.7rem;
+  color: var(--ink-dim);
+}
+
+/* ---------- Nav ---------- */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.6rem clamp(1.2rem, 4vw, 3rem);
+  mix-blend-mode: difference;
+}
+.nav__brand {
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: var(--ink);
+  font-size: 1.1rem;
+}
+.nav__links {
+  display: flex;
+  gap: clamp(1rem, 3vw, 2.5rem);
+}
+.nav__links a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+.nav__links a:hover {
+  opacity: 1;
+}
+.nav__cta {
+  background: transparent;
+  border: 1px solid rgba(234, 242, 255, 0.4);
+  color: var(--ink);
+  font-family: inherit;
+  padding: 0.5rem 1.2rem;
+  border-radius: 100px;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+.nav__cta:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+@media (max-width: 720px) {
+  .nav__links {
+    display: none;
+  }
+}
+
+/* ---------- Content / sections ---------- */
+.content {
+  position: relative;
+  z-index: 10;
+  pointer-events: none;
+}
+.section {
+  min-height: 100vh;
+  display: flex;
+  padding: clamp(1.5rem, 6vw, 6rem);
+  align-items: center;
+}
+.section--hero {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.section--right {
+  justify-content: flex-end;
+}
+.section--left {
+  justify-content: flex-start;
+}
+.section--center {
+  justify-content: center;
+  text-align: center;
+}
+
+.hero__title {
+  font-weight: 300;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+}
+.hero__title .line {
+  display: block;
+}
+.hero__title .line:first-child {
+  font-size: clamp(4rem, 20vw, 16rem);
+  font-weight: 500;
+}
+.hero__title .line--thin {
+  font-size: clamp(1rem, 3vw, 2rem);
+  color: var(--ink-dim);
+  letter-spacing: 0.1em;
+  margin-top: 0.5rem;
+}
+.hero__scroll {
+  margin-top: 3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.4em;
+  font-size: 0.7rem;
+  color: var(--ink-dim);
+  animation: pulse 2.4s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(6px);
+  }
+}
+
+.panel {
+  max-width: 30rem;
+  pointer-events: auto;
+}
+.panel--center {
+  max-width: 40rem;
+}
+.panel__index {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.2rem;
+}
+.panel__title {
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.4rem;
+}
+.panel__body {
+  font-size: clamp(1rem, 1.4vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--ink-dim);
+}
+.panel__cta {
+  display: inline-block;
+  margin-top: 1rem;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent);
+  padding-bottom: 0.2rem;
+  transition: color 0.3s;
+}
+.panel__cta:hover {
+  color: var(--accent);
+}
+
+/* ---------- Progress bar ---------- */
+.progress {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.08);
+  z-index: 20;
+}
+.progress__bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--accent), #ffffff);
+  transition: width 0.1s linear;
+}
