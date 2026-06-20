@@ -5,7 +5,8 @@ import { UnrealBloomPass } from 'three/addons/postprocessing/UnrealBloomPass.js'
 import { gsap } from 'gsap';
 import Lenis from 'lenis';
 
-import { iceVertexShader, iceFragmentShader } from './shaders/ice.js';
+import { createIceMaterial, loadCrystal } from './crystal.js';
+import { createOrbitRing, createFrozenGround } from './environment.js';
 
 /* ------------------------------------------------------------------ *
  * Boilerplate: renderer, scene, camera
@@ -14,7 +15,7 @@ const canvas = document.querySelector('#webgl');
 const sizes = { width: window.innerWidth, height: window.innerHeight };
 
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x05070d, 0.06);
+scene.fog = new THREE.FogExp2(0x05070d, 0.055);
 
 const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 0.1, 100);
 camera.position.set(0, 0, 6);
@@ -28,26 +29,25 @@ renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.toneMappingExposure = 1.1;
 
 /* ------------------------------------------------------------------ *
- * The crystal — an icosahedron driven by the custom ice shader
+ * The crystal — shared ice material, async geometry (GLTF or procedural)
  * ------------------------------------------------------------------ */
-const crystalUniforms = {
-  uTime: { value: 0 },
-  uDisplace: { value: 0.35 },
-  uColorCore: { value: new THREE.Color(0x0a2a4a) },
-  uColorRim: { value: new THREE.Color(0x9fe0ff) }
-};
+const crystalMat = createIceMaterial();
+const crystalUniforms = crystalMat.uniforms;
 
-const crystalGeo = new THREE.IcosahedronGeometry(1.6, 64);
-const crystalMat = new THREE.ShaderMaterial({
-  vertexShader: iceVertexShader,
-  fragmentShader: iceFragmentShader,
-  uniforms: crystalUniforms
+let crystal = null; // populated once loadCrystal resolves
+loadCrystal({ material: crystalMat }).then((mesh) => {
+  crystal = mesh;
+  scene.add(crystal);
+  // Bloom-in once geometry is ready.
+  gsap.fromTo(
+    crystalUniforms.uDisplace,
+    { value: 1.4 },
+    { value: 0.35, duration: 2.2, ease: 'expo.out' }
+  );
 });
-const crystal = new THREE.Mesh(crystalGeo, crystalMat);
-scene.add(crystal);
 
 // A faint wireframe shell for extra "facet" detail.
-const shellGeo = new THREE.IcosahedronGeometry(1.85, 2);
+const shellGeo = new THREE.IcosahedronGeometry(1.95, 2);
 const shellMat = new THREE.MeshBasicMaterial({
   color: 0x7fd4ff,
   wireframe: true,
@@ -56,6 +56,15 @@ const shellMat = new THREE.MeshBasicMaterial({
 });
 const shell = new THREE.Mesh(shellGeo, shellMat);
 scene.add(shell);
+
+/* ------------------------------------------------------------------ *
+ * Environment: orbiting shard ring + reflective frozen ground
+ * ------------------------------------------------------------------ */
+const orbitRing = createOrbitRing();
+scene.add(orbitRing);
+
+const ground = createFrozenGround();
+scene.add(ground);
 
 /* ------------------------------------------------------------------ *
  * Snowfield — a drifting particle system
@@ -81,7 +90,7 @@ const particles = new THREE.Points(particleGeo, particleMat);
 scene.add(particles);
 
 /* ------------------------------------------------------------------ *
- * Lighting (used by the wireframe / fog only; crystal is unlit shader)
+ * Lighting (for the lit shards / ground; crystal is an unlit shader)
  * ------------------------------------------------------------------ */
 scene.add(new THREE.AmbientLight(0x223355, 1.2));
 const keyLight = new THREE.DirectionalLight(0x9fd8ff, 2.0);
@@ -95,9 +104,9 @@ const composer = new EffectComposer(renderer);
 composer.addPass(new RenderPass(scene, camera));
 const bloom = new UnrealBloomPass(
   new THREE.Vector2(sizes.width, sizes.height),
-  0.7, // strength
-  0.6, // radius
-  0.85 // threshold
+  0.7,
+  0.6,
+  0.85
 );
 composer.addPass(bloom);
 
@@ -111,11 +120,10 @@ window.addEventListener('pointermove', (e) => {
 });
 
 /* ------------------------------------------------------------------ *
- * Smooth scroll (Lenis) + scroll-driven camera narrative (GSAP)
+ * Smooth scroll (Lenis) + scroll-driven camera narrative
  * ------------------------------------------------------------------ */
 const lenis = new Lenis({ lerp: 0.08, smoothWheel: true });
 let scrollProgress = 0;
-
 const progressBar = document.querySelector('#progressBar');
 
 lenis.on('scroll', ({ scroll, limit }) => {
@@ -129,13 +137,11 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-// Camera keyframes per scroll section: {x, y, z} positions the crystal moves
-// through as the user scrolls. We lerp toward the value derived from progress.
 const camKeyframes = [
-  { x: 0, y: 0, z: 6 },     // hero — centered
-  { x: -2.2, y: 0.4, z: 5 }, // about — crystal pushed right
-  { x: 2.2, y: -0.4, z: 5 }, // tech — crystal pushed left
-  { x: 0, y: 0, z: 4.2 }     // contact — close + centered
+  { x: 0, y: 0, z: 6 },
+  { x: -2.2, y: 0.4, z: 5 },
+  { x: 2.2, y: -0.4, z: 5 },
+  { x: 0, y: 0, z: 4.2 }
 ];
 
 function sampleCamera(p) {
@@ -153,7 +159,7 @@ function sampleCamera(p) {
 }
 
 /* ------------------------------------------------------------------ *
- * Animated rim-color shift across the scroll
+ * Animated palette across the scroll
  * ------------------------------------------------------------------ */
 const rimColorA = new THREE.Color(0x9fe0ff);
 const rimColorB = new THREE.Color(0xff9fd6);
@@ -169,12 +175,20 @@ function tick() {
   const elapsed = clock.getElapsedTime();
   crystalUniforms.uTime.value = elapsed;
 
-  // Idle rotation
-  crystal.rotation.y = elapsed * 0.15;
-  crystal.rotation.x = Math.sin(elapsed * 0.2) * 0.15;
+  if (crystal) {
+    crystal.rotation.y = elapsed * 0.15;
+    crystal.rotation.x = Math.sin(elapsed * 0.2) * 0.15;
+  }
   shell.rotation.y = -elapsed * 0.08;
   shell.rotation.z = elapsed * 0.05;
   particles.rotation.y = elapsed * 0.02;
+
+  // Orbit ring rotates as a whole; each shard tumbles on its own axis.
+  orbitRing.rotation.y = elapsed * 0.12;
+  for (const shard of orbitRing.children) {
+    shard.rotation.x += 0.01 * shard.userData.spin;
+    shard.rotation.y += 0.012 * shard.userData.spin;
+  }
 
   // Scroll-driven camera target + smooth pointer parallax
   const target = sampleCamera(scrollProgress);
@@ -186,7 +200,7 @@ function tick() {
   camera.position.z += (target.z - camera.position.z) * 0.06;
   camera.lookAt(0, 0, 0);
 
-  // Shift palette toward magenta near the end of the scroll
+  // Palette shift toward magenta near the end of the scroll
   crystalUniforms.uColorRim.value.copy(rimColorA).lerp(rimColorB, scrollProgress);
   crystalUniforms.uColorCore.value.copy(coreColorA).lerp(coreColorB, scrollProgress);
 
@@ -225,12 +239,6 @@ function runIntro() {
     },
     onComplete: () => {
       loader.classList.add('is-done');
-      // Crystal "blooms" in
-      gsap.fromTo(
-        crystalUniforms.uDisplace,
-        { value: 1.4 },
-        { value: 0.35, duration: 2.2, ease: 'expo.out' }
-      );
       gsap.fromTo(
         camera.position,
         { z: 11 },
@@ -248,7 +256,6 @@ function runIntro() {
   });
 }
 
-// Kick off once the window has loaded (textures/fonts settle).
 if (document.readyState === 'complete') {
   runIntro();
 } else {

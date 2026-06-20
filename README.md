@@ -20,11 +20,22 @@ original geometry and shaders (not a copy of their proprietary assets).
 
 ## What it does
 
-- A displaced icosahedron rendered with a hand-written fresnel + noise shader (the "ice").
+- A faceted **ice-shard crystal** rendered with a hand-written fresnel + noise shader.
+  It loads a Draco-compressed **GLTF model** if you drop one at
+  `public/models/crystal.glb`, and otherwise builds a procedural shard cluster so it
+  always renders (see `src/crystal.js`).
+- A ring of **orbiting ice shards** and a **reflective frozen-lake** ground plane
+  (`src/environment.js`).
 - A drifting particle snowfield with additive blending + bloom.
 - A scroll narrative: the camera moves through keyframes and the palette shifts
   from icy blue toward magenta as you scroll.
 - Pointer parallax, an animated loader, and an intro "bloom-in" sequence.
+
+## Adding your own 3D model
+
+Export a `.glb` from Blender, optionally Draco-compress it, and save it as
+`public/models/crystal.glb`. See `public/models/README.md` for the exact steps. No
+code change needed — the loader auto-centers, scales, and re-skins it with the ice shader.
 
 ## Run it
 
