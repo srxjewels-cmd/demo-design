@@ -1,0 +1,80 @@
+{
+  "source": "Brilliant Earth (brilliantearth.com)",
+  "category": "Marquise cut engagement rings",
+  "fetchedOn": "2026-07-08",
+  "note": "Product names, settings, metals and specs were gathered from Brilliant Earth product/category pages via web search. Brilliant Earth's own image CDN is unreachable from this build environment (network policy + bot protection), so the three angle views (top / side / perspective) are hand-built SVG illustrations standing in for the real photography. Each ring links to its live product page where the real photos can be viewed.",
+  "rings": [
+    {
+      "id": "aire-solitaire",
+      "name": "Aire Solitaire",
+      "setting": "Marquise Solitaire",
+      "metal": "18K Yellow Gold",
+      "metalTone": "yellow",
+      "centerShape": "Marquise",
+      "orientation": "vertical",
+      "specs": "Sleek knife-edge band with V-prong tips protecting the marquise points.",
+      "sku": "BE15547",
+      "url": "https://www.brilliantearth.com/Aire-Solitaire-Ring-Gold-BE15547-43100876/"
+    },
+    {
+      "id": "odessa-halo",
+      "name": "Odessa Halo",
+      "setting": "Marquise Halo",
+      "metal": "18K White Gold",
+      "metalTone": "white",
+      "centerShape": "Marquise",
+      "orientation": "vertical",
+      "specs": "Pavé halo with French-pavé band — 30 round accents, approx. 1/5 ct. tw.",
+      "sku": "BE1D32H",
+      "url": "https://www.brilliantearth.com/Odessa-Halo-Diamond-Ring-(1/5-ct.-tw.)-White-Gold-BE1D32H-1153217/"
+    },
+    {
+      "id": "simply-tacori-three-stone",
+      "name": "Simply Tacori Three Stone",
+      "setting": "Three-Stone Marquise",
+      "metal": "18K Yellow Gold",
+      "metalTone": "yellow",
+      "centerShape": "Marquise",
+      "orientation": "vertical",
+      "specs": "Marquise center flanked by two marquise side stones for a graceful trilogy.",
+      "sku": "BE1DT2685",
+      "url": "https://www.brilliantearth.com/Simply-Tacori-Three-Stone-Marquise-Diamond-Ring-Gold-BE1DT2685-12921126/"
+    },
+    {
+      "id": "sasha-three-stone",
+      "name": "Sasha Three Stone",
+      "setting": "Three-Stone Marquise",
+      "metal": "14K White Gold",
+      "metalTone": "white",
+      "centerShape": "Marquise",
+      "orientation": "vertical",
+      "specs": "Tapered three-stone design, approx. 1/3 ct. tw. of accent marquises.",
+      "sku": "BE1D384",
+      "url": "https://www.brilliantearth.com/Sasha-Three-Stone-Marquise-Diamond-Ring-(1/3-ct.-tw.)-White-Gold-BE1D384-52875428/"
+    },
+    {
+      "id": "secret-garden",
+      "name": "Secret Garden",
+      "setting": "Nature-Inspired Vintage",
+      "metal": "18K Yellow Gold",
+      "metalTone": "yellow",
+      "centerShape": "Marquise",
+      "orientation": "vertical",
+      "specs": "Scrolling vine gallery set with pavé, approx. 1/2 ct. tw., milgrain detail.",
+      "sku": "BE1D6351",
+      "url": "https://www.brilliantearth.com/Secret-Garden-Diamond-Ring-(1/2-ct.-tw.)-Gold-BE1D6351-8721404/"
+    },
+    {
+      "id": "east-west-bezel",
+      "name": "East-West Bezel Marquise",
+      "setting": "Modern Bezel (Horizontal)",
+      "metal": "Platinum",
+      "metalTone": "platinum",
+      "centerShape": "Marquise",
+      "orientation": "horizontal",
+      "specs": "Marquise set sideways in a full bezel — a clean, contemporary silhouette.",
+      "sku": "east-west",
+      "url": "https://www.brilliantearth.com/engagement-rings/east-west/"
+    }
+  ]
+}

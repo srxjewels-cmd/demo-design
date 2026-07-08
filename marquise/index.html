@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Marquise Cut Ring Designs — Brilliant Earth</title>
+<style>
+  :root{
+    --bg:#f6f2ec; --panel:#fffdfa; --ink:#241f1a; --muted:#8a8073;
+    --line:#e7ded1; --gold:#b08d3f; --gold-soft:#d9c48a;
+    --shadow:0 18px 48px -22px rgba(60,45,20,.35);
+    --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+    --sans:"Inter",system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{ --bg:#17140f; --panel:#201b15; --ink:#f2ebdd; --muted:#a99e8b;
+      --line:#332b21; --gold:#d9bd77; --gold-soft:#7c6a3f;
+      --shadow:0 18px 48px -22px rgba(0,0,0,.6); }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    -webkit-font-smoothing:antialiased;line-height:1.55}
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+
+  header.hero{padding:72px 24px 40px;text-align:center}
+  .eyebrow{font-size:12px;letter-spacing:.34em;text-transform:uppercase;
+    color:var(--gold);font-weight:600}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(38px,7vw,68px);
+    line-height:1.02;margin:.28em 0 .1em;letter-spacing:.5px}
+  .hero p{max-width:600px;margin:14px auto 0;color:var(--muted);font-size:16px}
+  .rule{width:56px;height:1px;background:var(--gold-soft);margin:28px auto 0}
+
+  .grid{display:grid;gap:26px;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));
+    padding:8px 0 40px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+  .views{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:1px;background:var(--line)}
+  .view{background:radial-gradient(120% 120% at 50% 30%,#ffffff 0%,#f3eee6 70%,#ece4d6 100%);
+    position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+  @media (prefers-color-scheme:dark){
+    .view{background:radial-gradient(120% 120% at 50% 30%,#2b251d 0%,#221d16 70%,#1c1811 100%)}
+  }
+  .view svg{width:100%;height:100%;display:block}
+  .view .tag{position:absolute;left:8px;bottom:7px;font-size:9.5px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);background:rgba(255,255,255,.72);
+    padding:2px 7px;border-radius:999px}
+  @media (prefers-color-scheme:dark){.view .tag{background:rgba(20,16,11,.6)}}
+
+  .body{padding:20px 20px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
+  .setting{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);
+    font-weight:600}
+  .name{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1.05;margin:0}
+  .meta{font-size:13px;color:var(--muted)}
+  .specs{font-size:13.5px;color:var(--ink);opacity:.82}
+  .foot{margin-top:auto;padding-top:14px;display:flex;align-items:center;
+    justify-content:space-between;border-top:1px solid var(--line)}
+  .chip{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .link{font-size:12.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--gold);text-decoration:none;white-space:nowrap}
+  .link:hover{text-decoration:underline}
+
+  .note{max-width:720px;margin:8px auto 64px;padding:16px 20px;border:1px dashed var(--line);
+    border-radius:12px;color:var(--muted);font-size:13px;text-align:center}
+  .note b{color:var(--ink)}
+  footer{padding:0 24px 56px;text-align:center;color:var(--muted);font-size:12px}
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="eyebrow">Brilliant Earth · Curated Selection</div>
+    <h1>Marquise Cut Ring Designs</h1>
+    <p>Six marquise engagement rings, each shown from three angles — top, profile, and
+       three-quarter perspective. The elongated, pointed silhouette that makes a hand look
+       longer and a carat look larger.</p>
+    <div class="rule"></div>
+  </header>
+
+  <main class="wrap">
+    <section class="grid" id="grid" aria-label="Marquise ring designs"></section>
+    <p class="note">
+      <b>About the imagery.</b> These three-angle views are hand-built illustrations. Brilliant
+      Earth's photo servers are unreachable from this build environment, so each card links to its
+      live product page where the real photography can be viewed.
+    </p>
+  </main>
+
+  <footer>Design specs sourced from brilliantearth.com · Illustrations rendered in-page as SVG.</footer>
+
+<script>
+const RINGS = [
+  {id:"aire-solitaire",name:"Aire Solitaire",setting:"Marquise Solitaire",metal:"18K Yellow Gold",
+   tone:"yellow",orientation:"vertical",style:"solitaire",
+   specs:"Sleek knife-edge band with V-prong tips protecting the marquise points.",
+   sku:"BE15547",url:"https://www.brilliantearth.com/Aire-Solitaire-Ring-Gold-BE15547-43100876/"},
+  {id:"odessa-halo",name:"Odessa Halo",setting:"Marquise Halo",metal:"18K White Gold",
+   tone:"white",orientation:"vertical",style:"halo",
+   specs:"Pavé halo with a French-pavé band — 30 round accents, approx. 1/5 ct. tw.",
+   sku:"BE1D32H",url:"https://www.brilliantearth.com/Odessa-Halo-Diamond-Ring-(1/5-ct.-tw.)-White-Gold-BE1D32H-1153217/"},
+  {id:"simply-tacori",name:"Simply Tacori Three Stone",setting:"Three-Stone Marquise",metal:"18K Yellow Gold",
+   tone:"yellow",orientation:"vertical",style:"three",
+   specs:"Marquise center flanked by two marquise side stones for a graceful trilogy.",
+   sku:"BE1DT2685",url:"https://www.brilliantearth.com/Simply-Tacori-Three-Stone-Marquise-Diamond-Ring-Gold-BE1DT2685-12921126/"},
+  {id:"sasha-three-stone",name:"Sasha Three Stone",setting:"Three-Stone Marquise",metal:"14K White Gold",
+   tone:"white",orientation:"vertical",style:"three",
+   specs:"Tapered three-stone design, approx. 1/3 ct. tw. of accent marquises.",
+   sku:"BE1D384",url:"https://www.brilliantearth.com/Sasha-Three-Stone-Marquise-Diamond-Ring-(1/3-ct.-tw.)-White-Gold-BE1D384-52875428/"},
+  {id:"secret-garden",name:"Secret Garden",setting:"Nature-Inspired Vintage",metal:"18K Yellow Gold",
+   tone:"yellow",orientation:"vertical",style:"vintage",
+   specs:"Scrolling vine gallery set with pavé, approx. 1/2 ct. tw., milgrain detail.",
+   sku:"BE1D6351",url:"https://www.brilliantearth.com/Secret-Garden-Diamond-Ring-(1/2-ct.-tw.)-Gold-BE1D6351-8721404/"},
+  {id:"east-west-bezel",name:"East-West Bezel Marquise",setting:"Modern Bezel (Horizontal)",metal:"Platinum",
+   tone:"platinum",orientation:"horizontal",style:"bezel",
+   specs:"Marquise set sideways in a full bezel — a clean, contemporary silhouette.",
+   sku:"east-west",url:"https://www.brilliantearth.com/engagement-rings/east-west/"}
+];
+
+const METAL = {
+  yellow:{a:"#f4dd97",b:"#c99a35",c:"#9c7420"},
+  white:{a:"#f4f5f8",b:"#cfd3dc",c:"#a7adba"},
+  platinum:{a:"#eef0f3",b:"#c3c7cf",c:"#9aa0ab"},
+  rose:{a:"#f4cdbc",b:"#d79a80",c:"#b3745a"}
+};
+
+let UID = 0;
+const uid = p => `${p}${++UID}`;
+
+// Marquise (pointed-oval) stone path centred at cx,cy with half length L, half width W.
+function marquisePath(cx,cy,L,W,rot=0){
+  const k=0.55;
+  // build vertical marquise then rotate about centre
+  const pts=[
+    ['M',0,-L],
+    ['C',k*W,-L, W,-k*L, W,0],
+    ['C',W,k*L, k*W,L, 0,L],
+    ['C',-k*W,L, -W,k*L, -W,0],
+    ['C',-W,-k*L, -k*W,-L, 0,-L],['Z']
+  ];
+  const r=rot*Math.PI/180, cos=Math.cos(r), sin=Math.sin(r);
+  const tx=(x,y)=>[ (cx + x*cos - y*sin).toFixed(2), (cy + x*sin + y*cos).toFixed(2) ];
+  let d='';
+  for(const seg of pts){
+    const c=seg[0]; d+=c;
+    for(let i=1;i<seg.length;i+=2){const [X,Y]=tx(seg[i],seg[i+1]); d+=` ${X},${Y}`;}
+    d+=' ';
+  }
+  return d.trim();
+}
+
+function defs(m){
+  const gm=uid('gm'), gs=uid('gs'), gr=uid('gr');
+  return {gm,gs,gr,markup:`
+  <defs>
+    <linearGradient id="${gm}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${m.a}"/><stop offset=".5" stop-color="${m.b}"/>
+      <stop offset="1" stop-color="${m.c}"/>
+    </linearGradient>
+    <linearGradient id="${gs}" x1="0" y1="0" x2=".7" y2="1">
+      <stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#eaf1f8"/>
+      <stop offset="1" stop-color="#bcd0e4"/>
+    </linearGradient>
+    <radialGradient id="${gr}" cx=".5" cy=".38" r=".65">
+      <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cdd9e6"/>
+    </radialGradient>
+  </defs>`};
+}
+
+// One marquise gemstone with a few facet lines.
+function gem(cx,cy,L,W,rot,gs){
+  const p=marquisePath(cx,cy,L,W,rot);
+  const inner=marquisePath(cx,cy,L*0.6,W*0.6,rot);
+  const r=rot*Math.PI/180, cos=Math.cos(r), sin=Math.sin(r);
+  const tx=(x,y)=>[cx + x*cos - y*sin, cy + x*sin + y*cos];
+  const [tipx1,tipy1]=tx(0,-L),[tipx2,tipy2]=tx(0,L);
+  const [wx1,wy1]=tx(-W,0),[wx2,wy2]=tx(W,0);
+  const [ix1,iy1]=tx(0,-L*0.6),[ix2,iy2]=tx(0,L*0.6);
+  const f="rgba(120,150,180,.55)";
+  return `
+    <path d="${p}" fill="url(#${gs})" stroke="#8ba6c2" stroke-width="1.1"/>
+    <path d="${inner}" fill="none" stroke="${f}" stroke-width=".8"/>
+    <line x1="${wx1.toFixed(1)}" y1="${wy1.toFixed(1)}" x2="${wx2.toFixed(1)}" y2="${wy2.toFixed(1)}" stroke="${f}" stroke-width=".8"/>
+    <line x1="${tipx1.toFixed(1)}" y1="${tipy1.toFixed(1)}" x2="${ix1.toFixed(1)}" y2="${iy1.toFixed(1)}" stroke="${f}" stroke-width=".8"/>
+    <line x1="${tipx2.toFixed(1)}" y1="${tipy2.toFixed(1)}" x2="${ix2.toFixed(1)}" y2="${iy2.toFixed(1)}" stroke="${f}" stroke-width=".8"/>
+    <line x1="${ix1.toFixed(1)}" y1="${iy1.toFixed(1)}" x2="${wx1.toFixed(1)}" y2="${wy1.toFixed(1)}" stroke="${f}" stroke-width=".6"/>
+    <line x1="${ix1.toFixed(1)}" y1="${iy1.toFixed(1)}" x2="${wx2.toFixed(1)}" y2="${wy2.toFixed(1)}" stroke="${f}" stroke-width=".6"/>
+    <line x1="${ix2.toFixed(1)}" y1="${iy2.toFixed(1)}" x2="${wx1.toFixed(1)}" y2="${wy1.toFixed(1)}" stroke="${f}" stroke-width=".6"/>
+    <line x1="${ix2.toFixed(1)}" y1="${iy2.toFixed(1)}" x2="${wx2.toFixed(1)}" y2="${wy2.toFixed(1)}" stroke="${f}" stroke-width=".6"/>`;
+}
+
+function melee(cx,cy,r,g){ return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#${g})" stroke="#9fb3c6" stroke-width=".5"/>`; }
+
+// ---- TOP VIEW ----
+function topView(ring){
+  const m=METAL[ring.tone], d=defs(m), S=200, cx=100, cy=100;
+  const horiz = ring.orientation==='horizontal';
+  const rot = horiz?90:0;
+  const L=horiz?46:52, W=18;
+  let extra='';
+
+  if(ring.style==='halo'){
+    // ring of melee around the marquise
+    let halo='';
+    const n=26;
+    for(let i=0;i<n;i++){
+      const t=i/n*2*Math.PI;
+      const rx=(W+9), ry=(L+9);
+      const x=cx+Math.cos(t)*rx, y=cy+Math.sin(t)*ry;
+      halo+=melee(x,y,2.4,d.gr);
+    }
+    extra=halo;
+  }
+  if(ring.style==='three'){
+    extra += gem(cx-30,cy,26,10,90,d.gs) + gem(cx+30,cy,26,10,90,d.gs);
+  }
+  if(ring.style==='vintage'){
+    let pv='';
+    for(let i=0;i<10;i++){const a=i/10*2*Math.PI; pv+=melee(cx+Math.cos(a)*(W+7),cy+Math.sin(a)*(L+7),1.8,d.gr);}
+    extra=pv;
+  }
+  const bezel = ring.style==='bezel'
+    ? `<path d="${marquisePath(cx,cy,L+6,W+6,rot)}" fill="url(#g_band_${d.gm})" stroke="${m.c}" stroke-width="1"/>`
+    : '';
+
+  // band as ellipse ring
+  const band = `<ellipse cx="${cx}" cy="${cy}" rx="58" ry="72" fill="none"
+      stroke="url(#${d.gm})" stroke-width="13"/>
+      <ellipse cx="${cx}" cy="${cy}" rx="58" ry="72" fill="none"
+      stroke="rgba(255,255,255,.25)" stroke-width="2"/>`;
+
+  // prongs (V at the two tips for vertical)
+  const prong = (x,y)=>`<circle cx="${x}" cy="${y}" r="3" fill="url(#${d.gm})" stroke="${m.c}" stroke-width=".6"/>`;
+  let prongs='';
+  if(!horiz && ring.style!=='bezel'){ prongs=prong(cx,cy-L)+prong(cx,cy+L)+prong(cx-W,cy)+prong(cx+W,cy); }
+
+  return `<svg viewBox="0 0 ${S} ${S}" role="img" aria-label="Top view">
+    ${d.markup}
+    <linearGradient id="g_band_${d.gm}" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="${m.a}"/><stop offset="1" stop-color="${m.c}"/>
+    </linearGradient>
+    ${band}
+    ${bezel}
+    ${extra}
+    ${gem(cx,cy,L,W,rot,d.gs)}
+    ${prongs}
+  </svg>`;
+}
+
+// ---- SIDE / PROFILE VIEW ----
+function sideView(ring){
+  const m=METAL[ring.tone], d=defs(m), S=200, cx=100, cy=118;
+  // shank: an open ring seen edge-on
+  const band=`<path d="M40,118 A60,60 0 1 0 160,118" fill="none"
+      stroke="url(#${d.gm})" stroke-width="12" stroke-linecap="round"/>
+      <path d="M40,118 A60,60 0 1 0 160,118" fill="none"
+      stroke="rgba(255,255,255,.22)" stroke-width="2"/>`;
+  // stone in profile: crown (thin) on top + pavilion (triangle) below, sitting above band top (y~58)
+  const topY=54;
+  const crown=`<polygon points="70,${topY} 130,${topY} 122,${topY+8} 78,${topY+8}"
+      fill="url(#${d.gs})" stroke="#8ba6c2" stroke-width="1"/>`;
+  const pav=`<polygon points="78,${topY+8} 122,${topY+8} 100,${topY+34}"
+      fill="url(#${d.gs})" stroke="#8ba6c2" stroke-width="1"/>
+      <line x1="100" y1="${topY+8}" x2="100" y2="${topY+34}" stroke="rgba(120,150,180,.5)" stroke-width=".7"/>
+      <line x1="86" y1="${topY+8}" x2="100" y2="${topY+34}" stroke="rgba(120,150,180,.4)" stroke-width=".6"/>
+      <line x1="114" y1="${topY+8}" x2="100" y2="${topY+34}" stroke="rgba(120,150,180,.4)" stroke-width=".6"/>`;
+  // setting basket / prongs holding pavilion
+  const basket=`<path d="M78,${topY+8} L88,${topY+40} M122,${topY+8} L112,${topY+40}"
+      stroke="url(#${d.gm})" stroke-width="3" stroke-linecap="round" fill="none"/>`;
+  const halo = ring.style==='halo'
+    ? `<rect x="66" y="${topY+7}" width="68" height="4" rx="2" fill="url(#${d.gr})" stroke="#9fb3c6" stroke-width=".4"/>` : '';
+  const bezelSide = ring.style==='bezel'
+    ? `<rect x="70" y="${topY-2}" width="60" height="14" rx="6" fill="none" stroke="url(#${d.gm})" stroke-width="3"/>` : '';
+  return `<svg viewBox="0 0 ${S} ${S}" role="img" aria-label="Side profile view">
+    ${d.markup}
+    ${band}
+    ${basket}
+    ${halo}
+    ${crown}${pav}
+    ${bezelSide}
+  </svg>`;
+}
+
+// ---- PERSPECTIVE / THREE-QUARTER VIEW ----
+function perspView(ring){
+  const m=METAL[ring.tone], d=defs(m), S=200, cx=100, cy=126;
+  const horiz=ring.orientation==='horizontal';
+  // band as a tilted ellipse (wide, short)
+  const band=`<ellipse cx="${cx}" cy="${cy}" rx="66" ry="30" fill="none"
+      stroke="url(#${d.gm})" stroke-width="14" transform="rotate(-8 ${cx} ${cy})"/>
+      <ellipse cx="${cx}" cy="${cy}" rx="66" ry="30" fill="none"
+      stroke="rgba(255,255,255,.22)" stroke-width="2.4" transform="rotate(-8 ${cx} ${cy})"/>`;
+  const stoneCx=100, stoneCy=74;
+  const L=horiz?30:44, W=16, rot=horiz?78:-8;
+  let extra='';
+  if(ring.style==='three'){
+    extra = gem(stoneCx-26,stoneCy+6,22,8,80,d.gs)+gem(stoneCx+26,stoneCy+6,22,8,80,d.gs);
+  }
+  if(ring.style==='halo'){
+    let h=''; const n=22;
+    for(let i=0;i<n;i++){const t=i/n*2*Math.PI; h+=melee(stoneCx+Math.cos(t)*(W+7),stoneCy+Math.sin(t)*(L+7)*0.62,2.1,d.gr);}
+    extra=h;
+  }
+  if(ring.style==='vintage'){
+    let h=''; for(let i=0;i<8;i++){h+=melee(56+i*11,cy-6,1.7,d.gr);} extra=h;
+  }
+  // little setting shadow under stone
+  const shadow=`<ellipse cx="${stoneCx}" cy="112" rx="26" ry="7" fill="rgba(80,60,25,.18)"/>`;
+  const post=`<path d="M${stoneCx-9},${stoneCy+L*0.7} L${stoneCx-4},112 M${stoneCx+9},${stoneCy+L*0.7} L${stoneCx+4},112"
+      stroke="url(#${d.gm})" stroke-width="3" stroke-linecap="round" fill="none"/>`;
+  return `<svg viewBox="0 0 ${S} ${S}" role="img" aria-label="Three-quarter perspective view">
+    ${d.markup}
+    ${shadow}
+    ${band}
+    ${post}
+    ${extra}
+    ${gem(stoneCx,stoneCy,L,W,rot,d.gs)}
+  </svg>`;
+}
+
+function card(ring){
+  const el=document.createElement('article');
+  el.className='card';
+  el.innerHTML=`
+    <div class="views">
+      <div class="view">${topView(ring)}<span class="tag">Top</span></div>
+      <div class="view">${sideView(ring)}<span class="tag">Profile</span></div>
+      <div class="view">${perspView(ring)}<span class="tag">3/4 Angle</span></div>
+    </div>
+    <div class="body">
+      <div class="setting">${ring.setting}</div>
+      <h2 class="name">${ring.name}</h2>
+      <div class="meta">${ring.metal} · Marquise center</div>
+      <div class="specs">${ring.specs}</div>
+      <div class="foot">
+        <span class="chip">SKU ${ring.sku}</span>
+        <a class="link" href="${ring.url}" target="_blank" rel="noopener">View on Brilliant Earth ↗</a>
+      </div>
+    </div>`;
+  return el;
+}
+
+const grid=document.getElementById('grid');
+RINGS.forEach(r=>grid.appendChild(card(r)));
+</script>
+</body>
+</html>
