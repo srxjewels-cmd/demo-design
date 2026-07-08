@@ -75,6 +75,30 @@
       "specs": "Marquise set sideways in a full bezel — a clean, contemporary silhouette.",
       "sku": "east-west",
       "url": "https://www.brilliantearth.com/engagement-rings/east-west/"
+    },
+    {
+      "id": "petite-elodie",
+      "name": "Petite Elodie Solitaire",
+      "setting": "Petite Marquise Solitaire",
+      "metal": "18K White Gold",
+      "metalTone": "white",
+      "centerShape": "Marquise",
+      "orientation": "vertical",
+      "specs": "Ultra-thin 1.5mm band letting a marquise center stand alone — delicate and modern.",
+      "sku": "BE18959",
+      "url": "https://www.brilliantearth.com/Petite-Elodie-1.5mm-Ring-White-Gold-BE18959-9027465/"
+    },
+    {
+      "id": "marquise-halo-blue",
+      "name": "Custom Marquise Halo",
+      "setting": "Blue Diamond Halo",
+      "metal": "14K White Gold",
+      "metalTone": "white",
+      "centerShape": "Marquise (Blue Diamond)",
+      "orientation": "vertical",
+      "specs": "A blue diamond marquise center wrapped in a bright pavé halo — a bespoke statement.",
+      "sku": "8833670",
+      "url": "https://www.brilliantearth.com/custom-rings/Marquise-Halo-Blue-Diamond-Ring-8833670/"
     }
   ]
 }

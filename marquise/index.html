@@ -70,7 +70,7 @@
   <header class="hero">
     <div class="eyebrow">Brilliant Earth · Curated Selection</div>
     <h1>Marquise Cut Ring Designs</h1>
-    <p>Six marquise engagement rings, each shown from three angles — top, profile, and
+    <p>Eight marquise engagement rings, each shown from three angles — top, profile, and
        three-quarter perspective. The elongated, pointed silhouette that makes a hand look
        longer and a carat look larger.</p>
     <div class="rule"></div>
@@ -112,7 +112,15 @@ const RINGS = [
   {id:"east-west-bezel",name:"East-West Bezel Marquise",setting:"Modern Bezel (Horizontal)",metal:"Platinum",
    tone:"platinum",orientation:"horizontal",style:"bezel",
    specs:"Marquise set sideways in a full bezel — a clean, contemporary silhouette.",
-   sku:"east-west",url:"https://www.brilliantearth.com/engagement-rings/east-west/"}
+   sku:"east-west",url:"https://www.brilliantearth.com/engagement-rings/east-west/"},
+  {id:"petite-elodie",name:"Petite Elodie Solitaire",setting:"Petite Marquise Solitaire",metal:"18K White Gold",
+   tone:"white",orientation:"vertical",style:"solitaire",
+   specs:"Ultra-thin 1.5mm band letting a marquise center stand alone — delicate and modern.",
+   sku:"BE18959",url:"https://www.brilliantearth.com/Petite-Elodie-1.5mm-Ring-White-Gold-BE18959-9027465/"},
+  {id:"marquise-halo-blue",name:"Custom Marquise Halo",setting:"Blue Diamond Halo",metal:"14K White Gold",
+   tone:"white",orientation:"vertical",style:"halo",stone:"blue",
+   specs:"A blue diamond marquise center wrapped in a bright pavé halo — a bespoke statement.",
+   sku:"8833670",url:"https://www.brilliantearth.com/custom-rings/Marquise-Halo-Blue-Diamond-Ring-8833670/"}
 ];
 
 const METAL = {
@@ -147,8 +155,9 @@ function marquisePath(cx,cy,L,W,rot=0){
   return d.trim();
 }
 
-function defs(m){
+function defs(m,stone){
   const gm=uid('gm'), gs=uid('gs'), gr=uid('gr');
+  const st = stone==='blue' ? ['#e4f2ff','#8fbdea','#3f7fc8'] : ['#ffffff','#eaf1f8','#bcd0e4'];
   return {gm,gs,gr,markup:`
   <defs>
     <linearGradient id="${gm}" x1="0" y1="0" x2="1" y2="1">
@@ -156,8 +165,8 @@ function defs(m){
       <stop offset="1" stop-color="${m.c}"/>
     </linearGradient>
     <linearGradient id="${gs}" x1="0" y1="0" x2=".7" y2="1">
-      <stop offset="0" stop-color="#ffffff"/><stop offset=".45" stop-color="#eaf1f8"/>
-      <stop offset="1" stop-color="#bcd0e4"/>
+      <stop offset="0" stop-color="${st[0]}"/><stop offset=".45" stop-color="${st[1]}"/>
+      <stop offset="1" stop-color="${st[2]}"/>
     </linearGradient>
     <radialGradient id="${gr}" cx=".5" cy=".38" r=".65">
       <stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#cdd9e6"/>
@@ -191,7 +200,7 @@ function melee(cx,cy,r,g){ return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="
 
 // ---- TOP VIEW ----
 function topView(ring){
-  const m=METAL[ring.tone], d=defs(m), S=200, cx=100, cy=100;
+  const m=METAL[ring.tone], d=defs(m,ring.stone), S=200, cx=100, cy=100;
   const horiz = ring.orientation==='horizontal';
   const rot = horiz?90:0;
   const L=horiz?46:52, W=18;
@@ -247,7 +256,7 @@ function topView(ring){
 
 // ---- SIDE / PROFILE VIEW ----
 function sideView(ring){
-  const m=METAL[ring.tone], d=defs(m), S=200, cx=100, cy=118;
+  const m=METAL[ring.tone], d=defs(m,ring.stone), S=200, cx=100, cy=118;
   // shank: an open ring seen edge-on
   const band=`<path d="M40,118 A60,60 0 1 0 160,118" fill="none"
       stroke="url(#${d.gm})" stroke-width="12" stroke-linecap="round"/>
@@ -281,7 +290,7 @@ function sideView(ring){
 
 // ---- PERSPECTIVE / THREE-QUARTER VIEW ----
 function perspView(ring){
-  const m=METAL[ring.tone], d=defs(m), S=200, cx=100, cy=126;
+  const m=METAL[ring.tone], d=defs(m,ring.stone), S=200, cx=100, cy=126;
   const horiz=ring.orientation==='horizontal';
   // band as a tilted ellipse (wide, short)
   const band=`<ellipse cx="${cx}" cy="${cy}" rx="66" ry="30" fill="none"
