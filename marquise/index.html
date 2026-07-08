@@ -316,14 +316,27 @@ function perspView(ring){
   </svg>`;
 }
 
+// If a ring has real photo URLs (ring.photos.top/side/angle), use them;
+// otherwise fall back to the hand-built SVG illustration for that view.
+function viewFor(ring, key, svg, alt){
+  const url = ring.photos && ring.photos[key];
+  if(url){
+    return `<img src="${url}" alt="${alt} — ${ring.name}" loading="lazy"
+      style="width:100%;height:100%;object-fit:cover"
+      onerror="this.outerHTML=this.getAttribute('data-fallback')"
+      data-fallback='${svg.replace(/'/g,"&#39;")}'>`;
+  }
+  return svg;
+}
+
 function card(ring){
   const el=document.createElement('article');
   el.className='card';
   el.innerHTML=`
     <div class="views">
-      <div class="view">${topView(ring)}<span class="tag">Top</span></div>
-      <div class="view">${sideView(ring)}<span class="tag">Profile</span></div>
-      <div class="view">${perspView(ring)}<span class="tag">3/4 Angle</span></div>
+      <div class="view">${viewFor(ring,'top',topView(ring),'Top view')}<span class="tag">Top</span></div>
+      <div class="view">${viewFor(ring,'side',sideView(ring),'Profile view')}<span class="tag">Profile</span></div>
+      <div class="view">${viewFor(ring,'angle',perspView(ring),'3/4 view')}<span class="tag">3/4 Angle</span></div>
     </div>
     <div class="body">
       <div class="setting">${ring.setting}</div>
