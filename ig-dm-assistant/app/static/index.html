@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#111114">
+  <title>DM Assistant</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="/static/style.css">
+  <link rel="apple-touch-icon" href="/static/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+  <!-- Login -->
+  <div id="login-view" class="view hidden">
+    <form id="login-form" class="login-card">
+      <h1>DM Assistant</h1>
+      <input type="password" id="password" placeholder="Password" autocomplete="current-password" required>
+      <button type="submit">Sign in</button>
+      <p id="login-error" class="error hidden">Wrong password</p>
+    </form>
+  </div>
+
+  <!-- App -->
+  <div id="app-view" class="view hidden">
+    <header>
+      <h1>DM Assistant</h1>
+      <div class="header-right">
+        <span id="conn-dot" class="dot" title="live connection"></span>
+        <button id="notify-btn" class="ghost" title="Enable push notifications">🔔</button>
+      </div>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="inbox">Inbox <span id="inbox-count" class="badge hidden"></span></button>
+      <button class="tab" data-tab="history">History</button>
+    </nav>
+
+    <main>
+      <section id="inbox" class="tab-panel">
+        <p id="inbox-empty" class="empty">No pending drafts. New DMs will appear here instantly.</p>
+        <div id="inbox-list"></div>
+      </section>
+      <section id="history" class="tab-panel hidden">
+        <div id="history-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <template id="card-template">
+    <article class="card">
+      <div class="card-head">
+        <img class="avatar" alt="">
+        <div class="who">
+          <span class="name"></span>
+          <span class="crm"></span>
+        </div>
+        <span class="flag hidden" title="">⚠️</span>
+      </div>
+      <p class="customer-msg"></p>
+      <div class="draft-wrap">
+        <p class="draft-label">Claude's draft</p>
+        <p class="draft-text"></p>
+        <textarea class="draft-edit hidden" rows="4"></textarea>
+      </div>
+      <div class="actions">
+        <button class="approve">✅ Approve</button>
+        <button class="edit ghost">✏️ Edit</button>
+        <button class="send hidden">Send</button>
+        <button class="cancel ghost hidden">Cancel</button>
+        <button class="skip ghost">⏭ Skip</button>
+      </div>
+    </article>
+  </template>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
